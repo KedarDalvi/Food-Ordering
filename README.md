@@ -6,6 +6,9 @@
 
 ![1](https://user-images.githubusercontent.com/67749378/132742100-c34bfabb-25c2-42b5-b723-7ee8ec08c760.jpg)
 
+Phone View:
+![WhatsApp Image 2021-09-10 at 12 14 00 AM](https://user-images.githubusercontent.com/67749378/132744614-58ca817b-0e4b-4686-bedd-c155663a2441.jpeg)
+
 
 #Menu Items:
 
