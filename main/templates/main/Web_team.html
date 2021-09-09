@@ -1,0 +1,119 @@
+{% load static %}
+{% load cart %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Web Team Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	      <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+        <link rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet"  href="{% static 'css/Web_team.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel="stylesheet" href="Web_team.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Abel&family=Montserrat:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" href="{% static 'images/log.png' %}"  type="image/x-icon">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-right nb">
+        <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}"onclick="window.location.href='/'">
+        <h3 class="title"onclick="window.location.href='/'">FoodieMoodie</h3>
+        <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon navbar-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav justify-content-end align-items-right">
+            <a class="nav-link active nbo" href="{% url 'main-home' %}">Home <i class="fa fa-home" style='font-size:24px'></i></a>
+            {% if user.is_authenticated %}
+            <a class="nav-link active nbo" href="{% url 'main-profile' %}">Profile <i class="fa fa-user ico" aria-hidden="true"></i></a>
+            <a class="nav-link active nbo" href="{% url 'main-cart' %}">Cart
+                <i class="fa" style="font-size:24px">&#xf07a;</i>
+              <span class='badge badge-warning' id='lblCartCount'> {{ request.session.cart|cart_length }} </span></a>  
+            <a class="nav-link active nbo" href="{% url 'main-logout' %}">Logout <i class="fa fa-sign-out " aria-hidden="true"></i></a>
+            {% else %}
+            <a class="nav-link active nbo" href="{%  url 'main-register' %}">Sign Up <i class="fa fa-user-plus  "style='font-size:16px'></i></a>
+            <a class="nav-link active nbo" href="{%  url 'main-signin' %}">Login <i class="fa fa-sign-in "></i></a>
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+    <div class="wrapper">
+        <div class="page-content">
+      <div class="container-fluid page-content">
+        <div class="row">
+            <div class="col-10 col-md-6">
+                <div class="main1">
+                    <div class="gradient">
+                        <div class="content">
+                            <h2 class='sc'>Aneesh Berde</h2>
+                            <div class="icons">
+                                <a href="https://www.linkedin.com/in/aneesh-berde-29b99a1a9"><i class="fa fa-linkedin-square bounce" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-md-6">
+                <div class="main2">
+                    <div class="gradient">
+                        <div class="content">
+                            <h2 class='sc'>Kedar Dalvi</h2>
+                            <div class="icons">
+                                <a href="http://www.linkedin.com/in/kedar-dalvi"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 col-md-6">
+                <div class="main3">
+                    <div class="gradient">
+                        <div class="content">
+                            <h2  class='sc'>Atharva Borawake</h2>
+                            <div class="icons">
+                                <a href=https://www.linkedin.com/in/atharva-borawake-1b34b61ab><i class="fa fa-linkedin-square bounce" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10 col-md-6">
+                <div class="main4">
+                    <div class="gradient">
+                        <div class="content">
+                            <h2 class='sc'>Saurabh Chidrewar</h2>
+                            <div class="icons">
+                                <a href=https://www.linkedin.com/in/saurabh-c-3192a5131><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="adjust" style="padding:3%;"></div>
+                    <footer>
+                      <div class="conatiner-fluid">
+                          <div >Meet Our Team and Follow Us at &nbsp;<i class="fa fa-instagram bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-facebook-square bounce"
+                            aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-twitter-square bounce" aria-hidden="true"></i> </div>
+                      </div>
+                  </footer>
+                  
+
+
+</div>
+</body>
+</html>

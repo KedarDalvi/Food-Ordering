@@ -1,0 +1,839 @@
+{% load static %}
+{% load cart %}
+<!Doctype HTML>
+<html>
+    <head>
+        <title>Home</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	      <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <li src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></li>
+        <li src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></li>
+        <li src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></li>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/Home.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+          integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+          integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+        <link rel="icon" href="{% static 'images/log.png' %}/" type="image/x-icon">
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg  justify-content-right nb fixed-top ">
+        <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}"
+          onclick="window.location.href='/'">
+        <h3 class="title">FoodieMoodie</h3>
+        <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse"
+          data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon navbar-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav justify-content-end align-items-right">
+            {% if user.is_authenticated %}
+            <a class="nav-link active nbo" href="{% url 'main-profile' %}">Profile <i class="fa fa-user ico" aria-hidden="true"></i></a>
+            <a class="nav-link active nbo" href="{% url 'main-cart' %}">Cart
+              <i class="fa" style="font-size:24px">&#xf07a;</i>
+              <span class='badge badge-warning' id='lblCartCount'> {{ request.session.cart|cart_length }} </span></a>
+            <a class="nav-link active nbo" href="{% url 'main-logout' %}">Logout <i class="fa fa-sign-out "
+                aria-hidden="true"></i></a>
+            {% else %}
+            <a class="nav-link active nbo" href="{% url 'main-register' %}">Sign Up <i class="fa fa-user-plus  "
+                style='font-size:16px'></i></a>
+            <a class="nav-link active nbo" href="{%  url 'main-signin' %}">Login <i class="fa fa-sign-in "></i></a>
+      
+            {% endif %}
+          </div>
+        </div>
+      </nav>
+      <!-- Main Items of the page-->
+      <div class="conatiner-fluid">
+        <!-- Search Bar-->
+        <div class="row brdr">
+            <div class="search_bar">
+              <form action="{% url 'search' %}" method="GET">
+                {%  csrf_token %}
+                <input type="text" name="search_dish" class="search" placeholder="Search for Dish or Food category ..." autocomplete="off">
+                <button type="submit"   class="search_btn btn d-flex justify-content-center align-items-center"><i class="fa fa-search bounce" aria-hidden="true"></i></button>
+              </form>
+            </div>
+        </div>
+
+            <!-- Food Carousel and side cards-->
+            <div class="row fcar d-flex brdr">
+
+                <div class="col-5 col-md-3 brdr">
+                  <a href="/#best_burgers" class="lcard"><img src="{% static 'menu_items/menu_images/t2.jpg' %}"></a>
+                </div>
+
+                <div class="col-10 col-md-6 brdr">
+                    <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                      <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                        <li data-target="#carouselExampleCaptions" data-slide-to="3"></li>
+                      </ol>
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                          <img src="{% static 'menu_items/menu_images/food.jpg' %}" class="d-block" alt="...">
+                          <div class="carousel-caption d-none d-md-block txt">
+                            <h3>Paneer Kathi Roll</h3>
+                            <p>Giving your Hunger a new Option.</p>
+                          </div>
+                        </div>
+                        <div class="carousel-item">
+                          <img src="{% static 'menu_items/menu_images/food1.jpg' %}" class="d-block " alt="...">
+                          <div class="carousel-caption d-none d-md-block txt">
+                            <h3>Chicken Shwarma</h3>
+                            <p>Desire meets a new Food.</p>
+                          </div>
+                        </div>
+                        <div class="carousel-item">
+                          <img src="{% static 'menu_items/menu_images/food2.jpg' %}" class="d-block " alt="...">
+                          <div class="carousel-caption d-none d-md-block txt">
+                            <h3>Triple fried Rice</h3>
+                            <p>Good Food for Good Moments.</p>
+                          </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{% static 'menu_items/menu_images/food3.jpg' %}" class="d-block " alt="...">
+                            <div class="carousel-caption d-none d-md-block txt">
+                              <h3>Triple fried Rice</h3>
+                              <p>Good Food for Good Moments.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                      <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </div>
+                  </div>
+
+                    <div class="col-5 col-md-3 brdr">
+                      <a href="/#pizzas" class="rcard"><img src="{% static 'menu_items/menu_images/test.jpg' %}"></a>
+                    </div>
+            </div>   
+           </div> 
+        <!--For appetizer category-->
+        
+            <div class="container-fluid">
+                <div class="row mt brdr top">
+                  <div class="type" action="/#1">Top picks for you !!</div>
+                
+                
+                <form method="POST" action = '{% url "main-home-post" %}'></form>    
+                          {% csrf_token %}
+                <div class="row brdr">
+                  {% for app in appetizers %}
+                  <div class="col-10 col-md-3 brdr" id={{app.id}}>
+                    <div class="card " id={{app.stars}}>
+                      <img class="food-item" src="{{ app.image.url }}">
+                      <a data-target="#food_{{app.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"href="#food_{{app.id}}" data-id={{app.id}}>{{app.name}}</a>
+                      <h7 class="food-des">{{ app.description }}</h7>
+                      <span class="rate_{{app.id}} rating"><h7 class="price">{{app.price}}rate_{{app.id}} &#x20B9;</h7> <!--&nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star"></i> </span>-->
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      {% if user.is_authenticated %}
+                        {% if app|is_present_in_cart:request.session.cart %}
+                        <div class="row no-gutters bt ac" >
+                          <form action="/#{{app.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='item' value='{{app.id}}'>
+                          
+                            {% if item|cart_count:request.session.cart == 1 %}
+                              <input hidden type="text" name='delete' value='True'>
+                              <button type="submit"  class="btn  as btn-info  text-center"><i class="fa fa-trash "aria-hidden="true"></i></button>
+                            {% else %}
+                              <input hidden type="text" name='remove' value='True'>
+                              <input type="submit" value="-" class="btn as btn-info  text-center">
+                            {% endif %}
+                          </form>
+                            <div class="cn">{{app|cart_count:request.session.cart}}</div>
+                            <form action="/#{{app.id}}" class="col-2 " method="post">
+                                {% csrf_token %}
+                                <input hidden type="text " name='item' value='{{app.id}}'>
+                                <input type="submit" value="+" class="btn as btn-info  text-center">
+                            </form>
+                        </div>
+                        {% else %}
+                        <form action="/#{{app.id}}" method="POST" class="btn">
+                            {% csrf_token %}
+                            <input hidden type="text" name='item' value='{{app.id}}'>
+                            <input type="submit" class="float-center btn btn-info  form-control cart-btn"
+                                value="Add To Cart">
+                  
+                        </form>
+                        {% endif %}
+                      {% else %}
+                      <form action="/#{{app.id}}" method="POST" class="btn">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{app.id}}'>
+                        <input type="submit" class="btn btn-info  form-control cart-btn"
+                            value="Add To Cart">
+                    </form>
+                    {% endif %}
+                  <hr /> 
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            </div>  
+ 
+            <!--For Fast_food category-->
+            <div class="container-fluid">
+              <div class="row mt brdr top">
+                <div class="type" action="/#fast_food">Fast-Food for you !!</div>
+            
+            
+                <form method="POST" action='{% url "main-home-post" %}'></form>
+                {% csrf_token %}
+                <div class="row brdr">
+                  {% for fastfood in fast_food %}
+                  <div class="col-10 col-md-3 brdr" id={{fastfood.id}}>
+                    <div class="card " id={{fastfood.stars}}>
+                      <img class="food-item" src="{{ fastfood.image.url }}">
+                      <a data-target="#food_{{fastfood.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"
+                        href="#food_{{fastfood.id}}" data-id={{fastfood.id}}>{{fastfood.name}}</a>
+                      <h7 class="food-des">{{ fastfood.description }}</h7>
+                      <span class="rate_{{fastfood.id}} rating">
+                        <!--&nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star"></i> </span>-->
+                        <div class="stars-outer">
+                          <div class="stars-inner"></div>
+                        </div>
+                        {% if user.is_authenticated %}
+                        {% if fastfood|is_present_in_cart:request.session.cart %}
+                        <div class="row no-gutters ac bt">
+                          <form action="/#{{fastfood.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='item' value='{{fastfood.id}}'>
+            
+                            {% if item|cart_count:request.session.cart == 1 %}
+                            <input hidden type="text" name='delete' value='True'>
+                            <button type="submit" class="btn  as btn-info  text-center"><i class="fa fa-trash "
+                                aria-hidden="true"></i></button>
+                            {% else %}
+                            <input hidden type="text" name='remove' value='True'>
+                            <input type="submit" value="-" class="btn as btn-info  text-center">
+                            {% endif %}
+                          </form>
+                          <div class="text-center col-2 cn">{{fastfood|cart_count:request.session.cart}}</div>
+                          <form action="/#{{fastfood.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text " name='item' value='{{fastfood.id}}'>
+                            <input type="submit" value="+" class="btn as btn-info  text-center">
+                          </form>
+                        </div>
+                        {% else %}
+                        <form action="/#{{fastfood.id}}" method="POST" class="btn">
+                          {% csrf_token %}
+                          <input hidden type="text" name='item' value='{{fastfood.id}}'>
+                          <input type="submit" class="float-center btn btn-info  form-control cart-btn" value="Add To Cart">
+            
+                        </form>
+                        {% endif %}
+                        {% else %}
+                        <form action="/#{{fastfood.id}}" method="POST" class="btn">
+                          {% csrf_token %}
+                          <input hidden type="text" name='item' value='{{fastfood.id}}'>
+                          <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                        </form>
+                        {% endif %}
+                        <hr />
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+      <!--For Special pizza category-->
+      
+      <div class="container-fluid">
+        <div class="row mt brdr top">
+          <div class="type" id="pizzas">Special Pizzas for You !!</div>
+      
+      
+          <form method="POST" action='{% url "main-home-post" %}'></form>
+          {% csrf_token %}
+          <div class="row brdr">
+            {% for pizza in pizzas %}
+            <div class="col-10 col-md-3 brdr" id={{pizza.id}}>
+              <div class="card " id={{pizza.stars}}>
+                <img class="food-item" src="{{ pizza.image.url }}">
+                <a data-target="#food_{{pizza.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"
+                  href="#food_{{pizza.id}}" data-id={{pizza.id}}>{{pizza.name}}</a>
+                <h7 class="food-des">{{ pizza.description }}</h7>
+                <span class="rate_{{pizza.id}} rating">
+                  <h7 class="price">{{pizza.price}} &#x20B9;</h7>
+                  <!--&nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star"></i> </span>-->
+                  <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                  </div>
+                  {% if user.is_authenticated %}
+                  {% if pizza|is_present_in_cart:request.session.cart %}
+                  <div class="row no-gutters ac bt">
+                    <form action="/#{{pizza.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{pizza.id}}'>
+      
+                      {% if item|cart_count:request.session.cart == 1 %}
+                      <input hidden type="text" name='delete' value='True'>
+                      <button type="submit" class="btn  as btn-info  text-center"><i class="fa fa-trash "
+                          aria-hidden="true"></i></button>
+                      {% else %}
+                      <input hidden type="text" name='remove' value='True'>
+                      <input type="submit" value="-" class="btn as btn-info  text-center">
+                      {% endif %}
+                    </form>
+                    <div class="text-center col-2 cn">{{pizza|cart_count:request.session.cart}}</div>
+                    <form action="/#{{pizza.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text " name='item' value='{{pizza.id}}'>
+                      <input type="submit" value="+" class="btn as btn-info  text-center">
+                    </form>
+                  </div>
+                  {% else %}
+                  <form action="/#{{pizza.id}}" method="POST" class="btn">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{pizza.id}}'>
+                    <input type="submit" class="float-center btn btn-info  form-control cart-btn" value="Add To Cart">
+      
+                  </form>
+                  {% endif %}
+                  {% else %}
+                  <form action="/#{{pizza.id}}" method="POST" class="btn">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{pizza.id}}'>
+                    <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                  </form>
+                  {% endif %}
+                  <hr />
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!--For Dessert category-->
+      
+      <div class="container-fluid">
+        <div class="row mt brdr top">
+          <div class="type" id="desserts">Desserts!!</div>
+      
+      
+          <form method="POST" action='{% url "main-home-post" %}'></form>
+          {% csrf_token %}
+          <div class="row brdr">
+            {% for dessert in desserts %}
+            <div class="col-10 col-md-3 brdr" id={{dessert.id}}>
+              <div class="card " id={{dessert.stars}}>
+                <img class="food-item" src="{{ dessert.image.url }}">
+                <a data-target="#food_{{dessert.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"
+                  href="#food_{{dessert.id}}" data-id={{dessert.id}}>{{dessert.name}}</a>
+                <h7 class="food-des">{{ dessert.description }}</h7>
+                <span class="rate_{{dessert.id}} rating">
+                  <h7 class="price">{{dessert.price}} &#x20B9;</h7>
+                  <!--&nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star"></i> </span>-->
+                  <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                  </div>
+                  {% if user.is_authenticated %}
+                  {% if dessert|is_present_in_cart:request.session.cart %}
+                  <div class="row no-gutters ac bt">
+                    <form action="/#{{dessert.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{dessert.id}}'>
+      
+                      {% if item|cart_count:request.session.cart == 1 %}
+                      <input hidden type="text" name='delete' value='True'>
+                      <button type="submit" class="btn  as btn-info  text-center"><i class="fa fa-trash "
+                          aria-hidden="true"></i></button>
+                      {% else %}
+                      <input hidden type="text" name='remove' value='True'>
+                      <input type="submit" value="-" class="btn as btn-info  text-center">
+                      {% endif %}
+                    </form>
+                    <div class="text-center col-2 cn">{{dessert|cart_count:request.session.cart}}</div>
+                    <form action="/#{{dessert.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text " name='item' value='{{dessert.id}}'>
+                      <input type="submit" value="+" class="btn as btn-info  text-center">
+                    </form>
+                  </div>
+                  {% else %}
+                  <form action="/#{{dessert.id}}" method="POST" class="btn ">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{dessert.id}}'>
+                    <input type="submit" class="float-center btn btn-info  form-control cart-btn" value="Add To Cart">
+      
+                  </form>
+                  {% endif %}
+                  {% else %}
+                  <form action="/#{{dessert.id}}" method="POST" class="btn ">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{dessert.id}}'>
+                    <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                  </form>
+                  {% endif %}
+                  <hr />
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <!--For Special Burger category-->
+      
+      <div class="container-fluid">
+        <div class="row mt brdr top">
+          <div class="type" id="best_burgers">Best burgers in the Town!!</div>
+      
+      
+          <form method="POST" action='{% url "main-home-post" %}'></form>
+          {% csrf_token %}
+          <div class="row brdr">
+            {% for burger in burgers %}
+            <div class="col-10 col-md-3 brdr" id={{burger.id}}>
+              <div class="card " id={{burger.stars}}>
+                <img class="food-item" src="{{ burger.image.url }}">
+                <a data-target="#food_{{burger.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"
+                  href="#food_{{burger.id}}" data-id={{burger.id}}>{{burger.name}}</a>
+                <h7 class="food-des">{{ burger.description }}</h7>
+                <span class="rate_{{burger.id}} rating">
+                  <h7 class="price">{{burger.price}} &#x20B9;</h7>
+                  <!--&nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star"></i> </span>-->
+                  <div class="stars-outer">
+                    <div class="stars-inner"></div>
+                  </div>
+                  {% if user.is_authenticated %}
+                  {% if burger|is_present_in_cart:request.session.cart %}
+                  <div class="row no-gutters ac bt">
+                    <form action="/#{{burger.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{burger.id}}'>
+      
+                      {% if item|cart_count:request.session.cart == 1 %}
+                      <input hidden type="text" name='delete' value='True'>
+                      <button type="submit" class="btn  as btn-info  text-center"><i class="fa fa-trash "
+                          aria-hidden="true"></i></button>
+                      {% else %}
+                      <input hidden type="text" name='remove' value='True'>
+                      <input type="submit" value="-" class="btn as btn-info  text-center">
+                      {% endif %}
+                    </form>
+                    <div class="text-center col-2 cn">{{burger|cart_count:request.session.cart}}</div>
+                    <form action="/#{{burger.id}}" class="col-2 " method="post">
+                      {% csrf_token %}
+                      <input hidden type="text " name='item' value='{{burger.id}}'>
+                      <input type="submit" value="+" class="btn as btn-info  text-center">
+                    </form>
+                  </div>
+                  {% else %}
+                  <form action="/#{{burger.id}}" method="POST" class="btn">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{burger.id}}'>
+                    <input type="submit" class="float-center btn btn-info  form-control cart-btn" value="Add To Cart">
+      
+                  </form>
+                  {% endif %}
+                  {% else %}
+                  <form action="/#{{burger.id}}" method="POST" class="btn">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{burger.id}}'>
+                    <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                  </form>
+                  {% endif %}
+                  <hr />
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Modal for appetizer food item-->
+      {% for app in appetizers %}
+      <div class="main-modal">
+      <div class="modal fade" id="food_{{app.id}}"  data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content food-it justify-content-center  ">
+            <div class="modal-body d-flex">
+              <div class="identifyingClass card fod-mod "data-id={{app.id}}>
+                <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  app.image.url }}">
+                <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{app.name}}</h4>
+                <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{app.description}}</h7>
+                <span id="rateMe1" class="rating">
+                  <h7 class="price"name="hiddenValue" id="hiddenValue">{{app.price}} &#x20B9;</h7>
+                &nbsp;&nbsp;<i
+                        class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                        class="fa fa-star checked"></i> <i class="fa fa-star"></i>
+                {% if user.is_authenticated %}
+                {% if app|is_present_in_cart:request.session.cart %}
+                <div class="row no-gutters bt ac">
+                  <form action="/#{{app.id}}" class="col-2 " method="post">
+                    {% csrf_token %}
+                    <input hidden type="text" name='item' value='{{app.id}}'>
+                
+                    {% if item|cart_count:request.session.cart == 1 %}
+                    <input hidden type="text" name='delete' value='True'>
+                    <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                        aria-hidden="true"></i></button>
+                    {% else %}
+                    <input hidden type="text" name='remove' value='True'>
+                    <input type="submit" value="-" class="btn as btn-info  text-center">
+                    {% endif %}
+                  </form>
+                  <div class="cn">{{app|cart_count:request.session.cart}} </div>
+                  <form action="/#{{app.id}}" class="col-2 " method="post">
+                    {% csrf_token %}
+                    <input hidden type="text " name='item' value='{{app.id}}'>
+                    <input type="submit" value="+" class="btn as btn-info  text-center">
+                  </form>
+                </div>
+                {% else %}
+                <form action="/#{{app.id}}" method="POST" class="btn">
+                  {% csrf_token %}
+                  <input hidden type="text" name='item' value='{{app.id}}'>
+                  <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                
+                </form>
+                {% endif %}
+                {% else %}
+                <form action="/#{{app.id}}" method="POST" class="btn">
+                  {% csrf_token %}
+                  <input hidden type="text" name='item' value='{{app.id}}'>
+                  <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                </form>
+                {% endif %}
+              </div>
+              <a class="close end" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      {% endfor %}
+      
+        <!-- Modal for fast_food food item-->
+        {% for fastfood in fast_food %}
+        <div class="main-modal">
+          <div class="modal fade" id="food_{{fastfood.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content food-it justify-content-center align-item-center ml-5">
+                <div class="modal-body d-flex">
+                  <div class="card fod-mod ">
+                    <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  fastfood.image.url }}">
+                    <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{fastfood.name}}</h4>
+                    <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{fastfood.description}}</h7>
+                    <span class="rating">
+                      <h7 class="price" name="hiddenValue" id="hiddenValue">{{fastfood.price}}&#x20B9;</h7> &nbsp;&nbsp;<i
+                        class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                        class="fa fa-star checked"></i> <i class="fa fa-star"></i>
+                    </span>
+                    {% if user.is_authenticated %}
+                    {% if fastfood|is_present_in_cart:request.session.cart %}
+                    <div class="row no-gutters bt ac">
+                      <form action="/#{{fastfood.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{fastfood.id}}'>
+        
+                        {% if fastfood|cart_count:request.session.cart == 1 %}
+                        <input hidden type="text" name='delete' value='True'>
+                        <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                            aria-hidden="true"></i></button>
+                        {% else %}
+                        <input hidden type="text" name='remove' value='True'>
+                        <input type="submit" value="-" class="btn as btn-info  text-center">
+                        {% endif %}
+                      </form>
+                      <div class="cn">{{fastfood|cart_count:request.session.cart}} </div>
+                      <form action="/#{{fastfood.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text " name='item' value='{{fastfood.id}}'>
+                        <input type="submit" value="+" class="btn as btn-info  text-center">
+                      </form>
+                    </div>
+                    {% else %}
+                    <form action="/#{{fastfood.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{fastfood.id}}'>
+                      <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+        
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <form action="/#{{fastfood.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{fastfood.id}}'>
+                      <input type="submit"  class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                    </form>
+                    {% endif %}
+                  </div>
+                  <a class="close end" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      
+        <!-- Modal for pizza food item-->
+        {% for pizza in pizzas %}
+        <div class="main-modal">
+          <div class="modal fade" id="food_{{pizza.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content food-it justify-content-center align-item-center ml-5">
+                <div class="modal-body d-flex">
+                  <div class="card fod-mod">
+                    <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  pizza.image.url }}">
+                    <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{pizza.name}}</h4>
+                    <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{pizza.description}}</h7>
+                    <span class="rating">
+                      <h7 class="price" name="hiddenValue" id="hiddenValue">{{pizza.price}}&#x20B9;</h7> &nbsp;&nbsp;<i
+                        class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                        class="fa fa-star checked"></i> <i class="fa fa-star"></i>
+                    </span>
+                    {% if user.is_authenticated %}
+                    {% if pizza|is_present_in_cart:request.session.cart %}
+                    <div class="row no-gutters bt ac">
+                      <form action="/#{{pizza.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{pizza.id}}'>
+        
+                        {% if pizza|cart_count:request.session.cart == 1 %}
+                        <input hidden type="text" name='delete' value='True'>
+                        <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                            aria-hidden="true"></i></button>
+                        {% else %}
+                        <input hidden type="text" name='remove' value='True'>
+                        <input type="submit" value="-" class="btn as btn-info  text-center">
+                        {% endif %}
+                      </form>
+                      <div class="cn">{{pizza|cart_count:request.session.cart}} </div>
+                      <form action="/#{{pizza.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text " name='item' value='{{pizza.id}}'>
+                        <input type="submit" value="+" class="btn as btn-info  text-center">
+                      </form>
+                    </div>
+                    {% else %}
+                    <form action="/#{{pizza.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{pizza.id}}'>
+                      <input type="submit" class="btn btn-info  form-control cart-btn"  value="Add To Cart">
+        
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <form action="/#{{pizza.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{pizza.id}}'>
+                      <input type="submit" class="btn btn-info  form-control cart-btn"  value="Add To Cart">
+                    </form>
+                    {% endif %}
+                  </div>
+                  <a class="close end" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- Modal for dessert food item-->
+        {% for dessert in desserts %}
+        <div class="main-modal">
+          <div class="modal fade" id="food_{{dessert.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content food-it justify-content-center align-item-center ml-5">
+                <div class="modal-body d-flex">
+                  <div class="card fod-mod">
+                    <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  dessert.image.url }}">
+                    <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{dessert.name}}</h4>
+                    <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{dessert.description}}</h7>
+                    <span class="rating">
+                      <h7 class="price" name="hiddenValue" id="hiddenValue">{{dessert.price}}&#x20B9;</h7> &nbsp;&nbsp;<i
+                        class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                        class="fa fa-star checked"></i> <i class="fa fa-star"></i>
+                    </span>
+                    {% if user.is_authenticated %}
+                    {% if dessert|is_present_in_cart:request.session.cart %}
+                    <div class="row no-gutters bt ac">
+                      <form action="/#{{dessert.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{dessert.id}}'>
+        
+                        {% if dessert|cart_count:request.session.cart == 1 %}
+                        <input hidden type="text" name='delete' value='True'>
+                        <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                            aria-hidden="true"></i></button>
+                        {% else %}
+                        <input hidden type="text" name='remove' value='True'>
+                        <input type="submit" value="-" class="btn as btn-info  text-center">
+                        {% endif %}
+                      </form>
+                      <div class="cn">{{dessert|cart_count:request.session.cart}} </div>
+                      <form action="/#{{dessert.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text " name='item' value='{{dessert.id}}'>
+                        <input type="submit" value="+" class="btn as btn-info  text-center">
+                      </form>
+                    </div>
+                    {% else %}
+                    <form action="/#{{dessert.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{dessert.id}}'>
+                      <input type="submit"  class="btn btn-info  form-control cart-btn" value="Add To Cart">
+        
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <form action="/#{{dessert.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{dessert.id}}'>
+                      <input type="submit"  class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                    </form>
+                    {% endif %}
+                  </div>
+                  <a class="close end" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        <!-- Modal for burger food item-->
+        {% for burger in burgers %}
+        <div class="main-modal">
+          <div class="modal fade" id="food_{{burger.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content food-it justify-content-center align-item-center ml-5">
+                <div class="modal-body d-flex">
+                  <div class="card fod-mod">
+                    <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  burger.image.url }}">
+                    <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{burger.name}}</h4>
+                    <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{burger.description}}</h7>
+                    <span class="rating">
+                      <h7 class="price" name="hiddenValue" id="hiddenValue">{{burger.price}}&#x20B9;</h7> &nbsp;&nbsp;<i
+                        class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                        class="fa fa-star checked"></i> <i class="fa fa-star"></i>
+                    </span>
+                    {% if user.is_authenticated %}
+                    {% if burger|is_present_in_cart:request.session.cart %}
+                    <div class="row no-gutters ac bt">
+                      <form action="/#{{burger.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{burger.id}}'>
+        
+                        {% if burger|cart_count:request.session.cart == 1 %}
+                        <input hidden type="text" name='delete' value='True'>
+                        <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                            aria-hidden="true"></i></button>
+                        {% else %}
+                        <input hidden type="text" name='remove' value='True'>
+                        <input type="submit" value="-" class="btn as  btn-info  text-center">
+                        {% endif %}
+                      </form>
+                      <div class="cn">{{burger|cart_count:request.session.cart}} </div>
+                      <form action="/#{{burger.id}}" class="col-2 " method="post">
+                        {% csrf_token %}
+                        <input hidden type="text " name='item' value='{{burger.id}}'>
+                        <input type="submit" value="+" class="btn as btn-info  text-center">
+                      </form>
+                    </div>
+                    {% else %}
+                    <form action="/#{{burger.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{burger.id}}'>
+                      <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+        
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <form action="/#{{burger.id}}" method="POST" class="btn">
+                      {% csrf_token %}
+                      <input hidden type="text" name='item' value='{{burger.id}}'>
+                      <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                    </form>
+                    {% endif %}
+                  </div>
+                  <a class="close end" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+      <!-- |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||-->
+      
+		<div class="pad" style="padding:3%;"></div>
+    <nav class="navbar navbar-expand-lg justify-content-center  nbt">
+        <div class="navbar-brand mc-auto nt">&copy Meet Our <a class="abs" href="{% url 'main-team' %}">Team</a> and Follow us at &nbsp;<i class="fa fa-instagram bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-facebook-square bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-twitter-square bounce" aria-hidden="true"></i> </div>
+	  </nav>
+    </div>
+    <script>
+        $(function () {
+        $(".identifyingClass").click(function () {
+        $('.main-modal').show();
+        var food_id = $(this).data('id');
+        $(".modal-body #hiddenValue").val(food_id);   
+        })
+        });
+  </script>
+  <script>
+    const ratings = {
+      rate_19: 2.8,  rate_24: 4.1, rate_29: 4.3, rate_34: 3.3, rate_39: 4.3, rate_44: 4.74, rate_8: 2.8, rate_2: 2.8, rate_2: 2.8,
+      rate_20: 3.3, rate_25: 4.74, rate_30: 4.74, rate_35: 4.74, rate_40: 3.3, rate_45: 3.3, rate_9: 2.8, rate_2: 2.8, rate_2: 2.8,
+      rate_21: 4.1, rate_26: 4.3, rate_31: 3.3, rate_36: 4.3, rate_41: 4.74, rate_46: 4.3, rate_10: 2.8, rate_2: 2.8, rate_2: 2.8,
+      rate_22: 4.5, rate_27: 4.1, rate_32: 4.1, rate_37: 4.1, rate_42: 4.1, rate_47: 4.1, rate_11: 2.8, rate_2: 2.8, rate_2: 2.8,
+      rate_23: 4, rate_28: 3.3, rate_33: 3.9, rate_38: 3.7, rate_43: 3.7, rate_7: 2.8, rate_12: 2.8, rate_2: 2.8, rate_2: 2.8,
+    };
+
+    // total number of stars
+    const starTotal = 5;
+
+    for (const rating in ratings) {
+      const starPercentage = (ratings[rating] / starTotal) * 100;
+      const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;
+      document.querySelector(`.${rating} .stars-inner`).style.width = starPercentageRounded;
+    }
+  </script>
+    </body>
+</html>

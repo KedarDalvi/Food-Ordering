@@ -1,0 +1,195 @@
+body {
+    background-image: url(/static/images/bg3.jpg);
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+
+}
+/* ------------------------------------------------------------------------------------------------------------*/
+/* Mid Text */
+.mt{
+    margin-top:6vw;
+    
+}
+.type{
+    position: relative;
+    left:2.5%;
+    border-bottom:2px solid whitesmoke;
+    width:95%;
+    color:white;
+    font-size:30px;
+}
+/* ------------------------------------------------------------------------------------------------------------*/
+/* Food item modal */
+.food-mod{
+    text-decoration: none !important;
+    outline:none;
+    color:black;
+}
+.food-mod:hover{
+    text-decoration: none !important;
+}
+.fod-mod{
+    margin-left: 8vw!important;
+}
+.food-it{
+    background: transparent !important;
+    outline-offset: none !important;
+    outline: none !important;
+    border:none !important;
+    
+}
+.end{
+    cursor: pointer;
+    outline: none !important;
+    color:white!important;
+    margin-left: 1vw;
+    margin-bottom:4vw;
+    font-size:30px;
+    font-weight: bolder;
+}
+/* bottom cards */
+.card{
+    height:23vw;
+    width:18vw;
+    margin-top:2vw;
+    margin-left:2.5vw;
+    cursor:pointer;
+    box-shadow: 4px 8px 4px 1px black;
+}
+.card:hover{
+    transform: scale(1.03);
+    transition: 0.2s ease-in;
+    transition:0.2s ease-out;
+}
+.c1{
+    margin-left:3.5vw;
+}
+.c4{
+    margin-left:1.5vw;
+}
+.food-item{
+    height:10vw;
+    width:17.9vw;
+    border-radius:2px;
+}
+.food-title{
+    text-align: center;
+    font-size:20px;
+    margin-top:0.5vw;
+}
+.food-des{
+    text-align: center;
+    margin-top:0.5vw;
+    font-size:15px;
+}
+.checked{
+    color:orange;
+    cursor:pointer;
+}
+.rating{
+    text-align: center;
+    margin-top:0.5vw;
+}
+.ac{
+    margin-left: 5vw!important;
+    margin-top: 2vw;
+}
+.label-warning[href],
+  .badge-warning[href] {
+    background-color: #c60505;
+  }
+  #lblCartCount {
+    font-size: 14px;
+    background: #c60505;
+    color: #fff;
+    padding: 0 5px;
+    height: 15px;
+    vertical-align: top;
+}
+.cn{
+    padding: 1vw;
+    padding-bottom: 2vw;
+
+}
+.as{
+    margin-top: 0.5vw;
+}
+
+.bt
+{
+    margin-left:6vw;
+    margin-top:1vw;
+}
+.cart-btn{
+    margin-top: 1vw;
+    width: 15vw!important;
+}
+.kd{
+    width: 6vw;
+    margin-top:1vw;
+}
+/* ------------------------------------------------------------------------------------------------------------*/
+/* Navbar and footer */
+.logo{
+    height:50px;
+    width:50px;
+    border-radius:50%;
+}
+.nbo{
+    margin-right:1.5vw;
+    color: #fff!important;
+} 
+.nbo:hover{
+    color: #fff!important;
+}
+.nb{
+    position: absolute;
+    right:0;
+    left:0;
+    top: 0 !important;
+    background-color: rgba(0,0,0,0.7)!important;
+    z-index:100;
+    font-size:18px;
+    color:white !important;
+}
+.nb:hover{
+    color: #fff;
+}
+.nbt{
+    background-color: rgba(0,0,0,0.7)!important;
+    font-size:18px;
+    color:white!important;
+}
+.title{
+    font-size:28px !important;
+    position: relative;
+    font-family:Roboto;
+    color:white;
+    text-decoration: none;
+    left:41%;
+}
+.log{
+    position: relative;
+    left:27%;
+    top:-6%;
+    font-size:27px;
+    font-weight: 550;
+}
+a.abs{
+    text-decoration: none;
+    color:orange;
+    font-size:18px;
+    font-family:Roboto;
+}
+a.ft{
+    color:white;
+    text-decoration:none;
+    outline: none;
+}
+.nt{
+    font-size:18px;
+}
+

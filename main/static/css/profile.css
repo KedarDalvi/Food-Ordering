@@ -1,0 +1,118 @@
+body{
+    background-image:url(/static/images/bg3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+.label-warning[href],
+  .badge-warning[href] {
+    background-color: #c60505;
+  }
+  #lblCartCount {
+    font-size: 14px;
+    background: #c60505;
+    color: #fff;
+    padding: 0 5px;
+    height: 15px;
+    vertical-align: top;
+}
+/* Navbar and Footer */
+.logo{
+    height:40px;
+    width:40px;
+    border-radius:50%;
+}
+.nbo{
+    margin-right:1vw;
+} 
+.nb{
+    position: absolute;
+    right:-1.2vw;
+    left:0;
+    top:0;
+    background-color: rgba(0,0,0,0.7)!important;
+    z-index:100;
+    font-size:18px;
+    color:white;
+}
+.nbt{
+    position: fixed;
+    background-color: rgba(0,0,0,0.7)!important;
+    font-size:18px;
+    color:white;
+    bottom:0;
+    right:0;
+    left:0;
+}
+.title{
+    font-size:28px !important;
+    position: relative;
+    font-family:Roboto;
+    color:white;
+    text-decoration: none;
+    left:41%;
+    margin-top:0.5vw;
+}
+a.abs{
+    text-decoration: none;
+    color:orange;
+    font-size:18px;
+    font-family:Roboto;
+}
+a.ft{
+    color:white;
+    text-decoration:none;
+    outline: none;
+}
+.nt{
+    font-size:18px;
+}
+.nt i{
+    transition: 0.3s;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    cursor:pointer;
+}
+.nt i:hover{
+    animation-name: bounce;
+    transform: scale(1.03);
+}
+
+/* Main page */
+.food_img{
+    height: 2vw;
+    width: 5vw;
+}
+
+.whole-bd{
+    margin-top:7.5%;
+    color:white;
+}
+.past-order{
+    background-color:#fff3cd ;
+    width:45vw;
+    max-height:32vw;
+    height:auto;
+    margin-left:-30vw;
+    overflow-y:auto;
+}
+.order-heading{
+    color:black;
+}
+.ord{
+    color:black;
+   
+}
+.date-price{
+    display: block;
+    justify-content: end;
+    align-items: right;
+    float:right;
+}

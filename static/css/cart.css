@@ -1,0 +1,602 @@
+/*.brdr{
+    border:1px solid red;
+}*/
+body {
+    background-image: url(/static/images/bg3.jpg);
+    background-position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+  }
+  
+  .label-warning[href],
+  .badge-warning[href] {
+    background-color: #c60505;
+  }
+  #lblCartCount {
+    font-size: 14px;
+    background: #c60505;
+    color: #fff;
+    padding: 0 5px;
+    height: 15px;
+    vertical-align: top;
+}
+/* Navbar and footer */
+.logo{
+    height:50px;
+    width:50px;
+    border-radius:50%;
+}
+.nbo{
+    margin-right:1.5vw;
+} 
+.nb{
+    position: absolute;
+    right:0;
+    left:0;
+    background-color: rgba(0,0,0,0.7)!important;
+    z-index:100;
+    font-size:18px;
+    color:white;
+}
+.nbt{
+    background-color: rgba(0,0,0,0.7)!important;
+    font-size:18px;
+    color:white;
+}
+.title{
+    font-size:28px !important;
+    position: relative;
+    font-family:Roboto;
+    color:white;
+    text-decoration: none;
+    left:41%;
+}
+.log{
+    position: relative;
+    left:27%;
+    top:-6%;
+    font-size:27px;
+    font-weight: 550;
+}
+a.abs{
+    text-decoration: none;
+    color:orange;
+    font-size:18px;
+    font-family:Roboto;
+}
+a.ft{
+    color:white;
+    text-decoration:none;
+    outline: none;
+}
+.nt{
+    font-size:18px;
+}
+
+/* Continue shopping row */
+.back{
+    position: absolute;
+    top:7vw;
+    width:100vw;
+    margin-left:1vw;
+}
+.shop-back{
+    position: relative;
+    left:3vw;
+    border:1px solid orange;
+    border-radius: 5px;
+    background-color: #001122;
+    width:17vw;
+    height:auto;
+    font-size: 20px;
+    text-decoration: none;
+    outline: none;
+    color:orange; 
+}
+.shop-back:hover{
+    transform: scale(1.04);
+    transition: 0.25s ease-in-out;
+}
+.item-disp{
+    position: absolute;
+    color:white;
+    top:7vw;
+    right:4vw;
+}
+.check{
+    background-color: #001122;
+    color:orange;
+    border:1px solid orange;
+    width:10vw;
+    height:auto;
+    border-radius: 5px;
+    font-size: 20px;
+}
+.check:hover{
+    transform: scale(1.04);
+    transition: 0.25s ease-in-out;
+}
+/* Main tables to display items */
+
+.item-header{
+    position:absolute;
+    top:12vw;
+}
+.headings{
+    width:95vw;
+    border:2px solid white;
+    margin-left:3.5vw;
+    height:3vw;
+    color:white;
+    text-align: left;
+    justify-content: left;
+    align-items: left;
+    background-color: #001122;
+}
+.image{
+    position: relative;
+    height:7vw;
+    width:12vw;
+    left:3vw;
+}
+.name{
+    font-size:20px;
+}
+
+/* add subtract button */
+
+span {cursor:pointer; }
+
+.minus, .plus{
+    width:34px;
+    height:34px;
+    background:#f2f2f2;
+    border-radius:4px;
+    border:1px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    color:black;
+}
+input{
+    height:34px;
+    width: 50px;
+    text-align: center;
+    font-size: 22px;
+    border:1px solid #ddd;
+    border-radius:4px;
+    display: inline-block;
+    vertical-align: middle;
+} 
+.number{
+    position: relative;
+    left:1vw;
+}  
+
+
+/* Media Query */
+
+@media (max-width:425px){
+    .logo{
+        height:40px;
+        width:40px;
+        border-radius: 50%;
+    }
+    .nb{
+        background-color: #000 !important;
+        opacity: 1;
+        font-size:18px;
+        z-index:10000 !important;
+    }
+    .nbt{
+        background-color: #000 !important;
+        opacity:1;
+        font-size:18px;
+        z-index:10000 !important;
+        bottom:0;
+    }
+    .nt{
+        font-size: 14px;
+    }
+    a.abs{
+        font-size:14px;
+    }
+    .title{
+        position: relative;
+        left:1vw;
+        font-size: 25px;
+    }
+    .input-area{
+        position: absolute;
+        top:23%;
+        left:19%;
+        height:97vw;
+        width:65vw;
+        font-size: 18px;
+        padding-left:8vw;
+        padding-top:12vw;
+        scroll-margin-bottom:2vw;
+        z-index:0;
+    }
+    .input-field{
+        width:50vw;
+        font-size:16px;
+        background-color: transparent;
+        border:none;
+        border-bottom: 1px solid whitesmoke;
+    }
+    .submit-btn{
+        width:27vw;
+        margin-left:6.5vw;
+        margin-top:4vw;
+    }
+    .ico{
+        font-size:18px;
+    }
+    .sign{
+        position: relative;
+        margin-top:7vw;
+        margin-right:2vw;
+        font-size: 14px;
+    }
+    .pad{
+        padding:20%;
+    }
+}
+@media(max-width:400px){
+    .input-area{
+        height:105vw;
+        width:70vw;
+        padding-left:12.5vw;
+        padding-top:14vw;
+        margin-left:-17vw;
+        margin-top:30vw;
+    }
+    .submit-btn{
+        margin-top:4.5vw;
+    }
+    .cre1{
+        margin-left:11vw;
+    }
+}
+@media(max-width:385px){
+    .input-area{
+        position:absolute;
+        left:33%;
+        top:40%;
+        height:110vw;
+    }
+    .sign{
+        margin-top:10vw;
+        margin-right:8vw;
+        font-size: 14.5px;
+    }
+    .nt{
+        font-size:11.7px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:11.7px;
+    }
+}
+@media(max-width:375px){
+    .input-area{
+        position: absolute;
+        top:34vw;
+        height:97vw;
+        width:65vw;
+        padding-top:5vw;
+        margin-left:-14vw;
+        padding-left:-10vw;
+    }
+    .input-field{
+        margin-left:-4.2vw;
+    }
+    .cre1{
+        height: 65px;
+        width:65px;
+        margin-left:12vw;
+        margin-top:-19vw;
+    }
+    .submit-btn{
+        margin-left:0.5vw;
+        margin-top:5vw;
+        font-size:18px;
+    }
+    .sign{
+        margin-top:7vw;
+        font-size: 12.5px;
+    }
+    .pad{
+        padding:50%;
+    }
+    .en{
+        display:none;
+    }
+    .cred{
+        margin-left:-1vw;
+        margin-top:1vw;
+    }
+}
+@media(max-width:365px){
+    .input-area{
+        position: absolute;
+        top:35vw;
+        height:97vw;
+        width:68vw;
+        font-size:18px;
+        padding-top:6vw;
+    }
+    .en{
+        display:none;
+    }
+    .stxt{
+        display:none;
+    }
+    .nt{
+        font-size:12px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:12px;
+    }
+    .cre1{
+        height:62px;
+        width:62px;
+        margin-left:13vw;
+        margin-top:-22vw;
+    }
+    .submit-btn{
+        margin-left: 0.5vw;
+    }
+}
+@media(max-width:325px){
+    a.title{
+        font-size:10px;
+    }
+    .input-area{
+        height: 95vw;
+        width:65vw;
+        font-size: 15px;
+        padding-left:11vw;
+        margin-top:30vw;
+    }
+    .cre1{
+        height:55px;   
+        width:55px;
+        margin-left:14vw;
+    }
+    .submit-btn{
+        font-size:15px;
+        margin-left:2vw;
+    }
+    .sign{
+        font-size: 11px;
+    }
+    .cred{
+        margin-top:3vw;
+    }
+}
+@media(max-width:335px){
+    .sign{
+        margin-right:6.5vw;
+    }
+    .nt{
+        font-size:10.5px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:10.5px;
+    }
+    .input-area{
+        height:95vw;
+    }
+
+}
+@media(min-width:1700px){
+    .cred{
+        position: fixed;
+        margin-left:2vw;
+    }
+    .stxt{
+        position: absolute;
+        left:22%;
+        top:47%;
+        font-size:2.5vw;
+    }
+    .en{
+        position: absolute;
+        margin-left:2.4vw;
+        margin-top:-2vw;
+        font-size:5.5vw;
+    }
+    .input-area{
+        font-size:28px;
+        padding-top:4.5vw;
+    }
+    .submit-btn{
+        margin-top:2vw;
+    }
+    .input-field{
+        padding-top:1vw;
+    }
+    .cre1{
+        height:120px;
+        width:120px;
+        border-radius: 50%;
+        margin-left:6vw;
+    }
+}
+
+
+.card{
+    height:23vw;
+    width:18vw;
+    margin-top:2vw;
+    margin-left:2.5vw;
+    cursor:pointer;
+    box-shadow: 4px 8px 4px 1px black;
+}
+.card:hover{
+    transform: scale(1.03);
+    transition: 0.2s ease-in;
+    transition:0.2s ease-out;
+}
+.c1{
+    margin-left:3.5vw;
+}
+.c4{
+    margin-left:1.5vw;
+}
+.food-item{
+    height:10vw;
+    width:17.9vw;
+    border-radius:2px;
+}
+.food-title{
+    text-align: center;
+    font-size:20px;
+    margin-top:0.5vw;
+}
+.food-des{
+    text-align: center;
+    margin-top:0.5vw;
+    font-size:15px;
+}
+.checked{
+    color:orange;
+    cursor:pointer;
+}
+.rating{
+    text-align: center;
+    margin-top:0.5vw;
+}
+.ac{
+    margin-top:1vw;
+    margin-left:4vw;
+    width:10vw;
+    justify-content: center;
+    align-content: center;
+    align-items:center;
+    color:white;
+    border-radius:3px;
+    outline:none;
+    text-decoration: none;
+}
+
+.bt
+{
+    margin-left:6vw;
+    margin-top:1vw;
+}
+
+
+/* Media Query */
+
+@media (max-width:425px){
+
+    .logo{
+        height:40px;
+        width:40px;
+        border-radius: 50%;
+    }
+    .nb{
+        background-color: #000 !important;
+        opacity: 1;
+        font-size:18px;
+        z-index:10000 !important;
+    }
+    .nbt{
+        background-color: #000 !important;
+        opacity:1;
+        font-size:18px;
+        z-index:10000 !important;
+        bottom:0;
+    }
+    .nt{
+        font-size: 14px;
+    }
+    a.abs{
+        font-size:14px;
+    }
+    .title{
+        position: relative;
+        left:1vw;
+        font-size: 25px;
+    }
+    .ico{
+        font-size:18px;
+    }
+    .sign{
+        position: relative;
+        margin-top:7vw;
+        margin-right:2vw;
+        font-size: 14px;
+    }
+    .pad{
+        padding:20%;
+    }
+}
+
+@media(max-width:385px){
+    .nt{
+        font-size:11.7px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:11.7px;
+    }
+}
+
+
+@media(max-width:365px){
+    .nt{
+        font-size:12px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:12px;
+    }
+}
+@media(max-width:325px){
+    a.title{
+        font-size:10px;
+    }
+}
+@media(max-width:335px){
+    .nt{
+        font-size:10.5px;
+        margin-left:2vw;
+    }
+    a.abs{
+        font-size:10.5px;
+    }
+}
+
+/* Desktop view bigger resolutions */
+
+@media(min-width:1550px)
+{
+    .card{
+        height:22vw;
+    }
+}
+@media(min-width:1695px)
+{
+    .card{
+        height:22vw;
+    }
+    .food-des{
+        font-size:21px;
+    }
+}

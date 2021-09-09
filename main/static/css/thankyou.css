@@ -1,0 +1,323 @@
+body{
+    background-image: url(/static/images/bg3.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    overflow: hidden;
+}
+.animation{
+  z-index:1000;
+}
+/* Navbar and Footer */
+
+.nbt{
+    position: fixed;
+    background-color: rgba(0,0,0,0.7)!important;
+    font-size:18px;
+    color:white;
+    bottom:0;
+    right:0;
+    left:0;
+}
+
+a.abs{
+    text-decoration: none;
+    color:orange;
+    font-size:18px;
+    font-family:Roboto;
+}
+a.ft{
+    color:white;
+    text-decoration:none;
+    outline: none;
+}
+.nt{
+    font-size:18px;
+}
+.nt i{
+    transition: 0.3s;
+   animation-duration: 1s;
+    animation-duration: 1s;
+   animation-fill-mode: both;
+    animation-fill-mode: both;
+   animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+   animation-iteration-count: infinite;
+    cursor:pointer;
+}
+.nt i:hover{
+    animation-name: bounce;
+    transform: scale(1.03);
+}
+
+/*tick animation */
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 3;
+    stroke-miterlimit: 10;
+    stroke: green;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+  }
+  
+  .checkmark {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: green;
+    stroke-miterlimit: 10;
+    margin: 10% auto;
+    box-shadow: inset 0px 0px 0px #7ac142;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  }
+  
+  .checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+  }
+  
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  @keyframes scale {
+    0%, 100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+  @keyframes fill {
+    100% {
+      box-shadow: inset 0px 0px 0px 80px whitesmoke;
+    }
+  }
+
+/* Thank you text */
+
+.thank-txt{
+    display: flex;
+    font-weight: bold;
+    font-size: 45px;
+    text-align: center;
+    justify-content: center;
+    margin-top: -5vw;
+    color:white;
+}
+.bck{
+    color:white;
+    font-size: 30px;
+    font-weight:bold ;
+    display: flex;
+    justify-content: center;
+}
+.bck a{
+  color:orange;
+  cursor: pointer;
+}
+
+
+/* confetti animation*/
+
+.confetti {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -5;
+}
+.confetti-piece {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #ffd300;
+    top: 0;
+    opacity: 0;
+}
+.confetti-piece:nth-child(1) {
+    left: 7%;
+   transform: rotate(-40deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 182ms;
+   animation-duration: 1116ms;
+}
+.confetti-piece:nth-child(2) {
+    left: 14%;
+   transform: rotate(4deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 161ms;
+   animation-duration: 1076ms;
+}
+.confetti-piece:nth-child(3) {
+    left: 21%;
+   transform: rotate(-51deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 481ms;
+   animation-duration: 1103ms;
+}
+.confetti-piece:nth-child(4) {
+    left: 28%;
+   transform: rotate(61deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 334ms;
+   animation-duration: 708ms;
+}
+.confetti-piece:nth-child(5) {
+    left: 35%;
+   transform: rotate(-52deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 302ms;
+   animation-duration: 776ms;
+}
+.confetti-piece:nth-child(6) {
+    left: 42%;
+   transform: rotate(38deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 180ms;
+   animation-duration: 1168ms;
+}
+.confetti-piece:nth-child(7) {
+    left: 49%;
+   transform: rotate(11deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 395ms;
+   animation-duration: 1200ms;
+}
+.confetti-piece:nth-child(8) {
+    left: 56%;
+   transform: rotate(49deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 14ms;
+   animation-duration: 887ms;
+}
+.confetti-piece:nth-child(9) {
+    left: 63%;
+   transform: rotate(-72deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 149ms;
+   animation-duration: 805ms;
+}
+.confetti-piece:nth-child(10) {
+    left: 70%;
+   transform: rotate(10deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 351ms;
+   animation-duration: 1059ms;
+}
+.confetti-piece:nth-child(11) {
+    left: 77%;
+   transform: rotate(4deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 307ms;
+   animation-duration: 1132ms;
+}
+.confetti-piece:nth-child(12) {
+    left: 84%;
+   transform: rotate(42deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 464ms;
+   animation-duration: 776ms;
+}
+.confetti-piece:nth-child(13) {
+    left: 91%;
+   transform: rotate(-72deg);
+   animation: makeItRain 1000ms infinite ease-out;
+   animation-delay: 429ms;
+   animation-duration: 818ms;
+}
+.confetti-piece:nth-child(odd) {
+    background: #7431e8;
+}
+.confetti-piece:nth-child(even) {
+    z-index: 1;
+}
+.confetti-piece:nth-child(4n) {
+    width: 5px;
+    height: 12px;
+    animation-duration: 2000ms;
+}
+.confetti-piece:nth-child(3n) {
+    width: 3px;
+    height: 10px;
+    animation-duration: 2500ms;
+    animation-delay: 1000ms;
+}
+.confetti-piece:nth-child(4n-7) {
+  background: red;
+}
+@keyframes makeItRain {
+    from {opacity: 0;}
+    50% {opacity: 1;}
+    to {-webkit-transform: translateY(350px);}
+}
+
+/* fadein animation */
+
+.fade-in {
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+    animation-fill-mode:backwards;
+    -webkit-animation-duration:5s;
+    -moz-animation-duration:5s;
+    animation-duration:5s;
+  }
+
+  @keyframes fadeIn{
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  @-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  

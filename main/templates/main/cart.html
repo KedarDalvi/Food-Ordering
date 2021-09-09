@@ -1,0 +1,154 @@
+{% load static %}
+{% load cart %}
+<!Doctype HTML>
+<html>
+    <head>
+        <title>Cart Page</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	      <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel="icon" href="{% static 'images/log.png' %}"  type="image/x-icon">
+    </head>
+    <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-right nb">
+            <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}" onclick="window.location.href='/'">
+            <h3 class="title" onclick="window.location.href='/'">FoodieMoodie</h3>
+            <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon navbar-dark"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+                <div class="navbar-nav justify-content-end align-items-right">
+                    <a class="nav-link active nbo"style="text-decoration:none" href="{% url 'main-home' %}">Home <i class="fa fa-home"style='font-size:24px'></i></a>
+                    <a class="nav-link active nbo"style="text-decoration:none" href="{% url 'main-profile' %}">Profile <i class="fa fa-user ico" aria-hidden="true"></i></a>
+                    <a class="nav-link active nbo" style="text-decoration:none"href="{% url 'main-logout' %}">Logout <i class="fa fa-sign-out " aria-hidden="true"></i></a>
+                </div>
+            </div>
+      </nav>
+
+      <!-- Cart main items -->
+
+      <div class="row brdr">
+          <div class="back">
+                <a  class="shop-back pl-2 pb-2 pt-1 pr-2 mb-4" style="text-decoration:none" href="{% url 'main-home' %}">Continue Shopping</a> 
+          </div>
+          <h4 class="item-disp text-align-end justify-content-end">
+              Subtotal (items: {{items|total_quantity:request.session.cart}} ) : {{items|total_cart_price:request.session.cart }} &#x20B9;
+             <button class="shop-back btn">
+              <form  method="POST" action="{% url 'success' %}" method="POST">
+                <script
+                src="https://checkout.razorpay.com/v1/checkout.js"
+                data-key="rzp_test_JTA0Jn9e0K4hY4" 
+                data-amount= '{{items|checkout_razorpay:request.session.cart }}'
+                data-currency="INR"
+                data-order_id="{{payment.id}}"
+                data-name="OFO"
+                data-description="Count memories, not calories. <3"
+                data-image="{% static 'images/log.png' %}"
+                data-prefill.name="request.session.name"
+                data-prefill.email="{{request.session.user_email}}"
+                data-theme.color="#CC600"
+            ></script>	
+            <input type="hidden" custom="Hidden Element" name="hidden">
+        </form>
+        </button>
+          </h4>
+            
+      </div>
+
+      <div class="row">
+          <div class="item-header">
+              <table class="headings table table-responsive-sm table-responsive-md ">
+                <thead>
+                    <tr>
+                        <th>Sr.No</th>
+                        <th></th>
+                        <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Items</th>
+                        <th> &nbsp;&nbsp;&nbsp;Price</th>
+                        <th> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Quantity</th>
+                        <th>Remove</th>
+                        <th>&nbsp;&nbsp;&nbsp;Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr id = {{item.id}}>
+                        <td class="name pt-5" > {{forloop.counter}} </td>
+                        <td><img class="image" src="{{item.image.url}}"></td>
+                        <td class="name pt-5">{{item.name}}</td>
+                        <td class="name pt-5">{{item.price}} &#x20B9;</td>
+                        <td class="name pt-5">
+                            <div class="number">
+                                {% if item|is_present_in_cart:request.session.cart %}
+                        <div class="row no-gutters bt" >
+                            <form action="/cart/#{{item.id}}" class="col-2 " method="post">
+                                {% csrf_token %}
+                                <input hidden type="text" name='item' value='{{item.id}}'>
+                                
+                                {% if item|cart_count:request.session.cart == 1 %}
+                                    <input hidden type="text" name='delete' value='True'>
+                                    <button type="submit" value="-" class="btn btn-block btn-info add_sub"><i class="fa fa-trash " aria-hidden="true"></i></button>
+                                {% else %}
+                                <input hidden type="text" name='remove' value='True'>
+                                <input type="submit" value="-" class="btn btn-block btn-info add_sub">
+                                {% endif %}
+                            </form>
+                            <input type="text" value="{{item|cart_count:request.session.cart}}" class="add_sub"/>
+                            <form action="/cart/#{{item.id}}" class="col-2 " method="post">
+                                {% csrf_token %}
+                                <input hidden type="text " name='item' value='{{item.id}}'>
+                                <input type="submit" value="+" class="btn btn-block btn-info add_sub">
+                            </form>
+                        </div>
+                        {% endif %}
+                            </div>
+                        </td>
+                        <td>
+                            <form action="/cart/#{{item.id}}" class="col-2 " method="post">
+                                {% csrf_token %}
+                                <input hidden type="text" name='item' value='{{item.id}}'>
+                                <input hidden type="text" name='delete' value='True'>
+                                <button type="submit" value="-" class=" btn btn-info del text-center"><i class="fa fa-trash " aria-hidden="true"></i></button>
+                                  
+                            </form>
+                        </td>
+                        <td class="name pt-5">{{item|total_price:request.session.cart}} &#x20B9;</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+            </div>
+      </div>
+      <!-- Footer -->
+        <div class="pad" style="padding:5%;"></div>
+        <nav class="navbar navbar-expand-lg justify-content-center navbar-dark bg-dark nbt fixed-bottom">
+            <div class="navbar-brand mc-auto nt">&copy Meet Our <a class="abs"href="{% url 'main-team' %}">Team</a> and Follow us at &nbsp;<i class="fa fa-instagram bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-facebook-square bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i class="fa fa-twitter-square bounce" aria-hidden="true"></i> </div>
+	    </nav>
+
+        <script>
+            	$(document).ready(function() {
+			$('.minus').click(function () {
+				var $input = $(this).parent().find('input');
+				var count = parseInt($input.val()) - 1;
+				count = count < 1 ? 1 : count;
+				$input.val(count);
+				$input.change();
+				return false;
+			});
+			$('.plus').click(function () {
+				var $input = $(this).parent().find('input');
+				$input.val(parseInt($input.val()) + 1);
+				$input.change();
+				return false;
+			});
+		});
+        </script>
+    </body>
+</html>

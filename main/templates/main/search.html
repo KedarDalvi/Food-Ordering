@@ -1,0 +1,205 @@
+{% load static %}
+{% load cart %}
+<!Doctype HTML>
+<html>
+
+<head>
+    <title>Search item</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/search.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="icon" href="{% static 'images/log.png' %}" type="image/x-icon">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-right nb ">
+        <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}"
+            onclick="window.location.href='/'">
+        <h3 class="title">FoodieMoodie</h3>
+        <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse"
+            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon navbar-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav justify-content-end align-items-right">
+                {% if user.is_authenticated %}
+                <a class="nav-link active nbo" href="{% url 'main-profile' %}">Profile <i class="fa fa-user ico"
+                        aria-hidden="true"></i></a>
+                <a class="nav-link active nbo" href="{% url 'main-cart' %}">Cart
+                    <i class="fa" style="font-size:24px">&#xf07a;</i>
+                    <span class='badge badge-warning' id='lblCartCount'> {{ request.session.cart|cart_length }} </span></a>
+                <a class="nav-link active nbo" href="{% url 'main-logout' %}">Logout <i class="fa fa-sign-out "
+                        aria-hidden="true"></i></a>
+                {% else %}
+                <a class="nav-link active nbo su" href="{%  url 'main-register' %}">Sign Up <i class="fa fa-user-plus  "
+                        style='font-size:16px'></i></a>
+                <a class="nav-link active nbo" href="{%  url 'main-signin' %}">Login <i class="fa fa-sign-in"></i></a>
+    
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+<!--For appetizer category-->
+<div class="container-fluid">
+    <div class="row mt brdr">
+        <div class="type" action="/#1">Search results <i class="fa fa-check-square-o" aria-hidden="true"></i></div>
+
+
+        <form method="POST" action='{% url "main-search-post" %}'></form>
+        {% csrf_token %}
+
+        <div class="row brdr">
+            {% for dish in dishes %}
+            <div class="col-10 col-md-3 brdr" id={{dish.id}} >
+                <div class="card " >
+                    <img class="food-item" src="{{ dish.image.url }}">
+                    <a data-target="#food_{{dish.id}}" data-toggle="modal" class="identifyingClass food-mod food-title"
+                        href="#food_{{dish.id}}" data-id={{dish.id}}>{{dish.name}}</a>
+                    <h7 class="food-des">{{ dish.description }}</h7>
+                    <span class="rate_{{dish.id}} rating">
+                        <h7 class="price">{{dish.price}} &#x20B9;</h7>
+                    {% if user.is_authenticated %}
+                    {% if dish|is_present_in_cart:request.session.cart %}
+                    <div class="row no-gutters bt ac">
+                        <form action="/search/#{{dish.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text" name='item' value='{{dish.id}}'>
+
+                            <input hidden type="text" name='remove' value='True'>
+                            <input type="submit" value="-" class="btn as btn-info  text-center">
+                        </form>
+                        <div class="cn">{{dish|cart_count:request.session.cart}} </div>
+                        <form action="/search/#{{dish.id}}" class="col-2 " method="post">
+                            {% csrf_token %}
+                            <input hidden type="text " name='item' value='{{dish.id}}'>
+                            <input type="submit" value="+" class="btn as btn-info  text-center">
+                        </form>
+                    </div>
+                    {% else %}
+                    <form action="/search/#{{dish.id}}" method="POST" class="btn">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{dish.id}}'>
+                        <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+
+                    </form>
+                    {% endif %}
+                    {% else %}
+                    <form action="/search/#{{dish.id}}" method="POST" class="btn">
+                        {% csrf_token %}
+                        <input hidden type="text" name='item' value='{{dish.id}}'>
+                        <input type="submit"class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                    </form>
+                    {% endif %}
+                    <hr />
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Modal for searched food item-->
+{% for dish in dishes %}
+<div class="main-modal">
+    <div class="modal fade" id="food_{{dish.id}}" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content food-it justify-content-center align-item-center ml-5">
+                <div class="modal-body d-flex">
+                    <div class="identifyingClass card fod-mod " data-id={{dish.id}}>
+                        <img class="food-item" name="hiddenValue" id="hiddenValue" src="{{  dish.image.url }}">
+                        <h4 class="food-title" name="hiddenValue" id="hiddenValue">{{dish.name}}</h4>
+                        <h7 class="food-des" name="hiddenValue" id="hiddenValue">{{dish.description}}</h7>
+                        <span id="rateMe1" class="rating">
+                            <h7 class="price" name="hiddenValue" id="hiddenValue">{{dish.price}} &#x20B9;</h7>
+                            &nbsp;&nbsp;<i class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                                class="fa fa-star checked"></i> <i class="fa fa-star checked"></i> <i
+                                class="fa fa-star"></i>
+                            {% if user.is_authenticated %}
+                            {% if dish|is_present_in_cart:request.session.cart %}
+                            <div class="row no-gutters bt ac">
+                                <form action="/#{{dish.id}}" class="col-2 " method="post">
+                                    {% csrf_token %}
+                                    <input hidden type="text" name='item' value='{{dish.id}}'>
+
+                                    {% if dish|cart_count:request.session.cart == 1 %}
+                                    <input hidden type="text" name='delete' value='True'>
+                                    <button type="submit" class="btn as btn-info  text-center"><i class="fa fa-trash "
+                                            aria-hidden="true"></i></button>
+                                    {% else %}
+                                    <input hidden type="text" name='remove' value='True'>
+                                    <input type="submit" value="-" class="btn as btn-info  text-center">
+                                    {% endif %}
+                                </form>
+                                <div class="cn">{{dish|cart_count:request.session.cart}} </div>
+                                <form action="/#{{dish.id}}" class="col-2 " method="post">
+                                    {% csrf_token %}
+                                    <input hidden type="text " name='item' value='{{dish.id}}'>
+                                    <input type="submit" value="+" class="btn as btn-info  text-center">
+                                </form>
+                            </div>
+                            {% else %}
+                            <form action="/#{{dish.id}}" method="POST" class="btn">
+                                {% csrf_token %}
+                                <input hidden type="text" name='item' value='{{dish.id}}'>
+                                <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+
+                            </form>
+                            {% endif %}
+                            {% else %}
+                            <form action="/#{{dish.id}}" method="POST" class="btn">
+                                {% csrf_token %}
+                                <input hidden type="text" name='item' value='{{dish.id}}'>
+                                <input type="submit" class="btn btn-info  form-control cart-btn" value="Add To Cart">
+                            </form>
+                            {% endif %}
+                    </div>
+                    <a class="close end" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="fa fa-window-close" aria-hidden="true"></i></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+        <!-- Footer -->
+        <div class="pad" style="padding: 3%;"></div>
+        <nav class="navbar navbar-expand-lg justify-content-center navbar-dark bg-dark nbt fixed-bottom">
+            <div class="navbar-brand mc-auto nt">&copy Meet Our <a class="abs" href="{% url 'main-team' %}">Team</a> and
+                Follow us at &nbsp;<i class="fa fa-instagram bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i
+                    class="fa fa-facebook-square bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i
+                    class="fa fa-twitter-square bounce" aria-hidden="true"></i> </div>
+        </nav>
+
+        <script>
+            $(function () {
+                $(".identifyingClass").click(function () {
+                    $('.main-modal').show();
+                    var food_id = $(this).data('id');
+                    $(".modal-body #hiddenValue").val(food_id);
+                })
+            });
+        </script>
+
+</body>
+
+</html>

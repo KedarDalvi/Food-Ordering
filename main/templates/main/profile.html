@@ -1,0 +1,151 @@
+{% load static %}
+{% load cart %}
+<!Doctype HTML>
+<html>
+
+<head>
+    <title> My Profile </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+    <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <link rel="icon" href="{% static 'images/log.png' %}" type="image/x-icon">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-right nb">
+        <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}"
+            onclick="window.location.href='/'">
+        <h3 class="title" onclick="window.location.href='/'">FoodieMoodie</h3>
+        <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse"
+            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon navbar-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav justify-content-end align-items-right">
+                <a class="nav-link active nbo" href="{% url 'main-home' %}">Home <i class="fa fa-home"
+                        style='font-size:24px'></i></a>
+                <a class="nav-link active nbo" href="{% url 'main-cart' %}">Cart
+                    <i class="fa" style="font-size:24px">&#xf07a;</i>
+                    <span class='badge badge-warning' id='lblCartCount'> {{ request.session.cart|cart_length }} </span></a>
+                <a class="nav-link active nbo" href="{% url 'main-logout' %}">Logout <i class="fa fa-sign-out "
+                        aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+
+        <div class=".col-xs-4 col-md-offset-2 whole-bd">
+            <div class="panel panel-default panel- border border-warning rounded shadow bg-light">
+                <div class="panel-heading text-center alert alert-warning"><h4>My Profile <i class="fa fa-user-circle-o" aria-hidden="true"></i></h4></div>
+                <div class="row">
+                    <div class="col-12 col-sm-9">
+                        <div class="panel-body ml-5">
+                            <div class="form-horizontal">
+                                <form style="color:black;">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">First Name</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" name="firstName"
+                                                placeholder="{{first_name}}" ng-model="me.firstName" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Last Name</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" name="lastName"
+                                                placeholder="{{last_name}}" ng-model="me.lastName" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="email" name="email" placeholder="{{ email }}"
+                                                ng-model="me.email" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Phone</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="number" name="phone"
+                                                placeholder="{{phone_no}}" ng-model="me.email" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">Address</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" type="text" name="address" placeholder="{{address}}"
+                                                ng-model="me.email" readonly>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-3">
+                        <div class="past-order boder rounded shadow mt-1 alert-warning">
+                            <div class="order-heading text-center  m-3">
+                                <h3 style=color:#856404>Previous Orders <i class="fa fa-cart-plus" aria-hidden="true"></i></h3>
+                            </div>
+                            {% for order in orders %}
+                            <div class="card shadow ord m-2">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="card-title">
+                                                <h5>{{order.item.name}}</h5>
+                                            </div>
+                                            <div class="card-text">{{order.item.description}}</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="date-price">
+                                                <div class="date mb-2">{{ order.ordered_date.date }}</div>
+                                                <div class="price mb-2">{{order.quantity|orders_total:order.price}}&#x20B9;</div>
+                                                <div class="qua">Quantity:{{ order.quantity }}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="pad" style="padding:3%;"></div>
+    <nav class="navbar navbar-expand-lg justify-content-center navbar-dark bg-dark nbt">
+        <div class="navbar-brand mc-auto nt">&copy Meet Our <a class="abs" href="{% url 'main-team' %}">Team</a> and Follow us
+            at &nbsp;<i class="fa fa-instagram bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i
+                class="fa fa-facebook-square bounce" aria-hidden="true"></i> &nbsp;&nbsp;<i
+                class="fa fa-twitter-square bounce" aria-hidden="true"></i>
+        </div>
+    </nav>
+
+</body>
+
+</html>

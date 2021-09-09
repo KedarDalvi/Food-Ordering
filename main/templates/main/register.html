@@ -1,0 +1,111 @@
+{% load static %}
+<!Doctype HTML>
+<html>
+    <head>
+        <title> Sign Up </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	      <link rel="stylesheet" type="text/css" href="https://fontawesome.com/v4.7.0/icon/times">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
+        <link href='https://fonts.googleapis.com/css?family=Advent Pro' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+        <link rel="icon" href="{% static 'images/log.png' %}"  type="image/x-icon">
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    </head>
+    <body>
+
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-right nb">
+        <img class="logo justify-content-right align-items-right" src="{% static 'images/log.png' %}" onclick="window.location.href='/'">
+        <h3 class="title" onclick="window.location.href='/'">FoodieMoodie</h3>
+        <button class="navbar-toggler navbar-dark justify-content-end " type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon navbar-dark"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+          <div class="navbar-nav justify-content-end align-items-right">
+            <a class="nav-link active nbo" href="{% url 'main-home' %}">Home <i class="fa fa-home" style='font-size:22px'></i></a>
+            <a class="nav-link active nbo" href="{% url 'main-signin' %}">Log In <i class="fa fa-sign-in" style='font-size: 15px'></i></a>
+           <!-- <a class="nav-link active nbo" href="#">Cart <i class="fa fa-shopping-bag" aria-hidden="true"></i></a>
+            <a class="nav-link active nbo" href="#">Profile <i class="fa fa-user ico" aria-hidden="true"></i></a>-->
+          </div>
+        </div>
+        
+      
+      </nav>
+          <form method="POST" id="login" class="col-10 col-md-6 input-area justify-content-center align-items-center" autocomplete='off'>
+            {% csrf_token %}
+            <td><div class='ajax_val' id='message2'></div></td>
+            <div class='mt-2'>
+            <label for="firstname" class="col-10 col-md-6 mt-2"><i class="fa fa-user ico" aria-hidden="true"></i> First Name :<br><input type="text"class="input-field " name="firstname" id="firstname" autocomplete='off'  required></label>
+            <label for="lastname"class="col-10 col-md-5 mt-2"><i class="fa fa-user ico" aria-hidden="true"></i> Last Name :<br><input type="text" class="input-field"  name="lastname" id="lastname" autocomplete='off' required></label>
+            <span></span>
+            <label for="email"class="col-10 col-md-6"><i class="fa fa-envelope-o" aria-hidden="true"></i> Email :<br><input type="email" class="input-field" name="email" id="email" autocomplete='off'  required></label>
+            <label for="phone_no"class="col-10 col-md-5"><i class="fa fa-mobile ico" aria-hidden="true"></i> Mobile :<br><input type="text" name="phone_no" id="phone_no" maxlength="10" pattern="\d{10}" title="You can enter only 10 digits..."autocomplete='off' class="input-field" required></label>
+            <label for="address"class="col-10 col-md-10"><i class="fa fa-address-book-o" aria-hidden="true"></i> Address :<br><input type="text" class="input-field ad" name="address" id="address" cols="19" rows="5"autocomplete='off' required></label>
+            <label for="password1"class="col-10 col-md-6"><i class="fa fa-lock ico" aria-hidden="true"></i> Password :<br><input type="password" name="password1" id="password1"autocomplete='off' class="input-field" required></label>
+            <label for="password2"class="col-10 col-md-5"><i class="fa fa-lock ico" aria-hidden="true"></i> Confirm Password :<br><input type="password"name="password2" id="password2"autocomplete='off' class="input-field" required></label> 
+            <button type="submit" class="submit-btn" >Sign Up</button>
+            </div>
+        </form>
+         
+      <!--Alert Model-->
+     
+        <nav class="navbar navbar-expand-lg justify-content-center navbar-dark bg-dark nbt fixed-bottom">
+            <div class="navbar-brand mc-auto nt">&copy Meet Our <a class="abs" href="{% url 'main-team' %}">Team</a> and Follow us at </div>
+	  </nav>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('input#email').keyup(function() {
+            let name = $(this).val();
+            $.ajax({
+              method: 'GET',
+                url: 'validation1/?nocache=' + Math.random(),
+                dataType: 'json',
+                cache: false,
+                data : {
+                    'name':name
+                },
+                success: function(data, name) {
+                    if(data.correct_but_used) {
+                        $('#message2').html("<h15 style='color:red;'>Email already registered</h15>");
+                        $('#submit').prop("disabled", true);
+                       }
+                    else if(data.wrong) {
+                        $('#message2').html("<h15 style='color:red;'>Enter valid Email</h15>");
+                        $('#submit').prop("disabled", true);
+                       }
+                    else {
+                       $('#message2').html("<h15 style='color:green;'>Email available</h15>");
+                       $('#submit').prop("disabled", false);
+                    }
+                }, timeout: 20000
+            });
+        });
+    });
+    </script>
+     <!--Alert Modal-->
+     <button id="modal"  data-toggle="modal" data-backdrop="false" data-target="#staticBackdrop"></button>
+     <div class="modal fade " id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header text-center float-center">
+             <h5 class="modal-title  text-center" id="staticBackdropLabel"style="color: red" > {{ message1 }}</h5>
+             <h5 class="modal-title  text-center" id="staticBackdropLabel" style="color: green">{{ message_success }}</h5>
+             <button type="button" class="close" data-dismiss="modal" >
+               <span aria-hidden="true">&times;</span>
+             </button>
+           </div>
+         </div>
+       </div>
+     </div>
+     <script type="text/javascript">
+       if ({{ wrong_credentials }} == 1) {
+           document.getElementById('modal').click();
+       }
+   </script>
+    </body>
+</html>
