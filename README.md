@@ -10,6 +10,8 @@
 
 ![](Project_Images/2.jpg)
 
+# Menu Items of Different Category:
+
 ![](Project_Images/3.jpg)
 
 ## Signup Page:
