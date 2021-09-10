@@ -1,6 +1,6 @@
 
 
-                                               #Online Food Ordering System
+                                               # Online Food Ordering System
                                                 Home Page(Landing Page):
 
 ![1](https://user-images.githubusercontent.com/67749378/132742100-c34bfabb-25c2-42b5-b723-7ee8ec08c760.jpg)
